@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | Dominick&#39;s Homepage</title>
+    <link>https://dominickrei.github.io/project/</link>
+      <atom:link href="https://dominickrei.github.io/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 01 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://dominickrei.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Projects</title>
+      <link>https://dominickrei.github.io/project/</link>
+    </image>
+    
+    <item>
+      <title>DP-Shield</title>
+      <link>https://dominickrei.github.io/project/dpshield/</link>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://dominickrei.github.io/project/dpshield/</guid>
+      <description>&lt;p&gt;DP-Shield is an aggregation and comprehensive evaluation of differentially private image obfuscation techniques.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SocialBit</title>
+      <link>https://dominickrei.github.io/project/socialbit/</link>
+      <pubDate>Thu, 01 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://dominickrei.github.io/project/socialbit/</guid>
+      <description>&lt;p&gt;SocialBit is a smartwatch app for classifying the social interaction of stroke patients. Stroke patients are notoriously at risk of reduced social interaction, but their health outcomes directly depend on it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ABCTracker</title>
+      <link>https://dominickrei.github.io/project/abctracker/</link>
+      <pubDate>Sat, 01 Jun 2019 00:00:00 +0000</pubDate>
+      <guid>https://dominickrei.github.io/project/abctracker/</guid>
+      <description>&lt;p&gt;ABCTracker is a multi object tracking system designed to track multiple biological objects in dense scenes. The software is primarily used by biologists interested in studying insect behavior. In most cases, there are many objects to track that are similar in appearance and densely distributed in the scene, making biological object tracking difficult.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

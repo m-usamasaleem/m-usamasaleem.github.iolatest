@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Paper Summary | Dominick&#39;s Homepage</title>
+    <link>https://dominickrei.github.io/tag/paper-summary/</link>
+      <atom:link href="https://dominickrei.github.io/tag/paper-summary/index.xml" rel="self" type="application/rss+xml" />
+    <description>Paper Summary</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 05 Feb 2022 12:38:08 -0500</lastBuildDate>
+    <image>
+      <url>https://dominickrei.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Paper Summary</title>
+      <link>https://dominickrei.github.io/tag/paper-summary/</link>
+    </image>
+    
+    <item>
+      <title>Defending Against Packet-Size Side-Channel Attacks in Iot Networks</title>
+      <link>https://dominickrei.github.io/post/iot-device-privacy/</link>
+      <pubDate>Sat, 05 Feb 2022 12:38:08 -0500</pubDate>
+      <guid>https://dominickrei.github.io/post/iot-device-privacy/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://ieeexplore.ieee.org/document/8461330&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Link to Paper&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;IoT devices are ubiquitous and communicate with one another over wireless networks
+&lt;ul&gt;
+&lt;li&gt;These communications (packets) can be intercepted and observed by an adversary. Typically the content is encrypted to prevent sensitive data leakage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Statistical analysis can be performed on these packets, regardless of content encryption, to reveal information about the packet
+&lt;ul&gt;
+&lt;li&gt;Known as side-channel attack&lt;/li&gt;
+&lt;li&gt;This paper focuses on side-channel attacks against &lt;strong&gt;packet size&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Existing solutions do not provide tunable or optimized privacy&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;technical-summary&#34;&gt;Technical Summary&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;We observe a sequence of packet sizes: $X_1, X_2, &amp;hellip;, X_n : X_i \in \mathcal{X}$ where $\mathcal{X}$ is the set of all possible packet sizes
+&lt;ul&gt;
+&lt;li&gt;Each $X_i$ is assumed to be i.i.d&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Each observed packet size follows a distribution $p_v(X=x)$ that is a member of a family of distribtions denoted $\mathcal{P}$
+&lt;ul&gt;
+&lt;li&gt;$\mathcal{P}$ may represent many different IoT devices (a camera likely sends larger packets than a sleep monitor,) or different states of the same IoT device (a device in &lt;em&gt;active&lt;/em&gt; mode likely sends larger packets than a device in &lt;em&gt;sleep&lt;/em&gt; mode.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Provide privacy by padding the packet to a size that is determined by a conditional distribution, $q(\hat{\mathcal{X}} = \hat{x} | X = x)$. Where $\hat{x}$ is the modified packet size and $\hat{\mathcal{X}}$ is the set of possible obfuscated packet sizes&lt;/li&gt;
+&lt;li&gt;Define heuristics for utility. Average and maximum bandwidth are shown&lt;/li&gt;
+&lt;li&gt;Local Differential Privacy (LDP) constraint:
+&lt;ul&gt;
+&lt;li&gt;Can use Bayes Theorem to represent in terms of $q$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$\small\frac{P(X \sim p_v | \hat{X} = \hat{x})}{P(X \sim p_{v&#39;} | \hat{X} = \hat{x})} \leq \frac{P(X \sim p_v)}{P(X \sim p_{v&#39;})} \cdot e^\epsilon \quad (1)$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;By optimizing $q(\hat{\mathcal{X}} = \hat{x} | X = x)$ with respect to either of two heuristics and while satisfying the LDP constraint (as well as trivial constraints that ensure $q$ is a proper probability distribution,) we obtain a mechanism for obfuscating packet size in a way that satisfies LDP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- $$\small\stackrel{\mbox{Bayes}}{\Rightarrow} \frac{ \sum_{i=1}^{|\mathcal{X}|} p_v(x_i) \cdot q(\hat{X} = \hat{x}_j | X = x_i) } { \sum_{i=1}^{|\mathcal{X}|} }$$ --&gt;
+&lt;h2 id=&#34;takeaways&#34;&gt;Takeaways&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Using a heuristic and privacy constraint, we can create a provably private mechanism by solving the emerging optimization problem&lt;/li&gt;
+&lt;li&gt;The mechanism in this paper is relatively simple ($q$ is a discrete distribution,) but can be extended to more complex mechanisms&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

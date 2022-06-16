@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Speech | Dominick&#39;s Homepage</title>
+    <link>https://dominickrei.github.io/tag/speech/</link>
+      <atom:link href="https://dominickrei.github.io/tag/speech/index.xml" rel="self" type="application/rss+xml" />
+    <description>Speech</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Jul 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://dominickrei.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Speech</title>
+      <link>https://dominickrei.github.io/tag/speech/</link>
+    </image>
+    
+    <item>
+      <title>SocialBit</title>
+      <link>https://dominickrei.github.io/project/socialbit/</link>
+      <pubDate>Thu, 01 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://dominickrei.github.io/project/socialbit/</guid>
+      <description>&lt;p&gt;SocialBit is a smartwatch app for classifying the social interaction of stroke patients. Stroke patients are notoriously at risk of reduced social interaction, but their health outcomes directly depend on it.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

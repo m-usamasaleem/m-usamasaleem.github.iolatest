@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Object Tracking | Dominick&#39;s Homepage</title>
+    <link>https://dominickrei.github.io/tag/object-tracking/</link>
+      <atom:link href="https://dominickrei.github.io/tag/object-tracking/index.xml" rel="self" type="application/rss+xml" />
+    <description>Object Tracking</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://dominickrei.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Object Tracking</title>
+      <link>https://dominickrei.github.io/tag/object-tracking/</link>
+    </image>
+    
+    <item>
+      <title>ABCTracker</title>
+      <link>https://dominickrei.github.io/project/abctracker/</link>
+      <pubDate>Sat, 01 Jun 2019 00:00:00 +0000</pubDate>
+      <guid>https://dominickrei.github.io/project/abctracker/</guid>
+      <description>&lt;p&gt;ABCTracker is a multi object tracking system designed to track multiple biological objects in dense scenes. The software is primarily used by biologists interested in studying insect behavior. In most cases, there are many objects to track that are similar in appearance and densely distributed in the scene, making biological object tracking difficult.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

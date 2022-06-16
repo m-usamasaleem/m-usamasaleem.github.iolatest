@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts | Dominick&#39;s Homepage</title>
+    <link>https://dominickrei.github.io/post/</link>
+      <atom:link href="https://dominickrei.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>Posts</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 18 Feb 2022 10:36:43 -0500</lastBuildDate>
+    <image>
+      <url>https://dominickrei.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Posts</title>
+      <link>https://dominickrei.github.io/post/</link>
+    </image>
+    
+    <item>
+      <title>GAN Inversion</title>
+      <link>https://dominickrei.github.io/post/gan-inversion/</link>
+      <pubDate>Fri, 18 Feb 2022 10:36:43 -0500</pubDate>
+      <guid>https://dominickrei.github.io/post/gan-inversion/</guid>
+      <description>&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Given a latent vector, a GAN generates a photorealistic image that is in the domain the GAN was trained on
+&lt;ul&gt;
+&lt;li&gt;This is the classical use case of GANs. i.e., mapping from latent vector $\rightarrow$ image&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;GAN inversion aims to map a target image to a latent vector. This latent vector should produce an image that is visually similar to the input image
+&lt;ul&gt;
+&lt;li&gt;Why is this useful? With the latent vector (and given that semantic features are disentangled in the latent space), we can move along different dimensions in the latent space to change semantic features of the input image (e.g., age in the case of face images, or color in the case of vehicle images)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;generative-adversarial-networks&#34;&gt;Generative Adversarial Networks&lt;/h2&gt;
+&lt;p&gt;A GAN (Generative Adversarial Network) is composed of a generator and descriminator. During training, the generator aims to synthesize images that resemble the training data, while the descriminator aims to descriminate between real and synthesized data. The two models are trained simultaneously in an adversarial process. After training, the generator can be used to produce synthetic images that resemble images from the training domain.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The input to the generator is a vector $z \in \mathbb{R}^d$, where $d$ is the dimensionality of the generator&amp;rsquo;s latent space. During training, $z$ is drawn from a simple distribution (e.g., Gaussian,) that the generator maps to images
+&lt;ul&gt;
+&lt;li&gt;$G: \mathcal{Z} \rightarrow \mathcal{X}$. $\mathcal{G}$ is the generator, $\mathcal{Z}$ is the latent space of the generator, and $\mathcal{X}$ is the image domain&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;gan-inversion&#34;&gt;GAN Inversion&lt;/h2&gt;
+&lt;p&gt;GAN inversion aims to map a target image to a latent vector in $\mathcal{Z}$. This inverted latent vector can be used to generate an image that (1) photorealistically reconstructs the target image and (2) facilitates downstream tasks such as image editting (i.e., moving the inverted latent vector in the latent space produce meaningful change in the generated image.)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;To solve (1) you must minimize the &amp;ldquo;distance&amp;rdquo; between the input image and the generated image. Because $G(z)$ is a non-convex function, this problem is challenging&lt;/li&gt;
+&lt;li&gt;Solving (2) is directly related to the choice of the GAN&amp;rsquo;s latent space, not so much the inversion technique
+&lt;ul&gt;
+&lt;li&gt;Often times, it is possible to obtain a latent vector that completely satisfies (1). However, the region of latent space around this vector may not allow for semantic control&lt;/li&gt;
+&lt;li&gt;The classical latent space is the $\mathcal{Z}$ space. This space usually entangles semantic features, making it difficult to generate feature combinations that were not seen in the training data
+&lt;ul&gt;
+&lt;li&gt;Latent spaces that disentangle the semantic features have become popular. Some examples are the W space &lt;a href=&#34;https://arxiv.org/abs/1812.04948&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;(from StyleGAN)&lt;/a&gt;, W+ space, and S space&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;approaches-to-gan-inversion&#34;&gt;Approaches to GAN inversion&lt;/h2&gt;
+&lt;p&gt;Approaches to GAN inversion can be classified into three categories: learning based, optimization based, and hybrid.&lt;/p&gt;
+&lt;h3 id=&#34;learning-based&#34;&gt;Learning based&lt;/h3&gt;
+&lt;p&gt;Learning based approaches involve training an encoder/decoder style architecture to predict the latent vector of any target image. In this case, the encoder is trained and the generator is used as a static decoder. An encoder $E$ parameterized by $\theta_{E}$ is trained with the following objective:&lt;/p&gt;
+&lt;p&gt;$$\theta_E^* \ \underset{\theta_E}{argmin} \sum_n \mathcal{L}(G(E(x_n; \theta_{E})), x_n) \quad (1)$$&lt;/p&gt;
+&lt;p&gt;Where $\mathcal{L}$ is a similarity metric between two images, $G$ is a generator, and $x_n$ is the $n$th training image. The training set consists of (image, latent vector) pairs thats are obtained by passing randomly sampled latent vectors through the generator. After training, an image can be passed through the encoder and the output should be be a latent vector that best reconstructs the input image in the generator (assuming a well trained encoder.) This approach typically performs better than optimization based approaches and does not fall into local optima.&lt;/p&gt;
+&lt;h3 id=&#34;optimization-based&#34;&gt;Optimization based&lt;/h3&gt;
+&lt;p&gt;Optimization based approaches attempt to find the latent vector of a target image through directly optimizing the following:&lt;/p&gt;
+&lt;p&gt;$$z_* = \underset{z}{argmin} \ {\mathcal{L}(G(z, \theta), x)} \quad (2)$$&lt;/p&gt;
+&lt;p&gt;Where $G$ is a generator parameterized by $\theta$, and $x$ is the target image. Typically, the latent vector is optimized via gradient descent. This approach is prone to falling into local optima because (2) is highly non-convex, thus a good initialization is critical for finding a suitable latent vector (some approaches select the best of many random initializations while other train a DNN to select many initializations.) This approach can be computationally expensive since the optimization procedure must be performed for every target image (as opposed to learning based approaches which, once trained, only require a single forward pass.)&lt;/p&gt;
+&lt;h3 id=&#34;hybrid-based&#34;&gt;Hybrid based&lt;/h3&gt;
+&lt;p&gt;Hybrid based approaches adopt strategies from both learning and optimization based approaches. Typically, hybrid approaches perform the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Train an encoder $E$ to predict a latent vector from an image&lt;/li&gt;
+&lt;li&gt;Use the latent vector produced from $E(x)$ as initialization to the optimizer&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Defending Against Packet-Size Side-Channel Attacks in Iot Networks</title>
+      <link>https://dominickrei.github.io/post/iot-device-privacy/</link>
+      <pubDate>Sat, 05 Feb 2022 12:38:08 -0500</pubDate>
+      <guid>https://dominickrei.github.io/post/iot-device-privacy/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://ieeexplore.ieee.org/document/8461330&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Link to Paper&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;IoT devices are ubiquitous and communicate with one another over wireless networks
+&lt;ul&gt;
+&lt;li&gt;These communications (packets) can be intercepted and observed by an adversary. Typically the content is encrypted to prevent sensitive data leakage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Statistical analysis can be performed on these packets, regardless of content encryption, to reveal information about the packet
+&lt;ul&gt;
+&lt;li&gt;Known as side-channel attack&lt;/li&gt;
+&lt;li&gt;This paper focuses on side-channel attacks against &lt;strong&gt;packet size&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Existing solutions do not provide tunable or optimized privacy&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;technical-summary&#34;&gt;Technical Summary&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;We observe a sequence of packet sizes: $X_1, X_2, &amp;hellip;, X_n : X_i \in \mathcal{X}$ where $\mathcal{X}$ is the set of all possible packet sizes
+&lt;ul&gt;
+&lt;li&gt;Each $X_i$ is assumed to be i.i.d&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Each observed packet size follows a distribution $p_v(X=x)$ that is a member of a family of distribtions denoted $\mathcal{P}$
+&lt;ul&gt;
+&lt;li&gt;$\mathcal{P}$ may represent many different IoT devices (a camera likely sends larger packets than a sleep monitor,) or different states of the same IoT device (a device in &lt;em&gt;active&lt;/em&gt; mode likely sends larger packets than a device in &lt;em&gt;sleep&lt;/em&gt; mode.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Provide privacy by padding the packet to a size that is determined by a conditional distribution, $q(\hat{\mathcal{X}} = \hat{x} | X = x)$. Where $\hat{x}$ is the modified packet size and $\hat{\mathcal{X}}$ is the set of possible obfuscated packet sizes&lt;/li&gt;
+&lt;li&gt;Define heuristics for utility. Average and maximum bandwidth are shown&lt;/li&gt;
+&lt;li&gt;Local Differential Privacy (LDP) constraint:
+&lt;ul&gt;
+&lt;li&gt;Can use Bayes Theorem to represent in terms of $q$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$\small\frac{P(X \sim p_v | \hat{X} = \hat{x})}{P(X \sim p_{v&#39;} | \hat{X} = \hat{x})} \leq \frac{P(X \sim p_v)}{P(X \sim p_{v&#39;})} \cdot e^\epsilon \quad (1)$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;By optimizing $q(\hat{\mathcal{X}} = \hat{x} | X = x)$ with respect to either of two heuristics and while satisfying the LDP constraint (as well as trivial constraints that ensure $q$ is a proper probability distribution,) we obtain a mechanism for obfuscating packet size in a way that satisfies LDP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- $$\small\stackrel{\mbox{Bayes}}{\Rightarrow} \frac{ \sum_{i=1}^{|\mathcal{X}|} p_v(x_i) \cdot q(\hat{X} = \hat{x}_j | X = x_i) } { \sum_{i=1}^{|\mathcal{X}|} }$$ --&gt;
+&lt;h2 id=&#34;takeaways&#34;&gt;Takeaways&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Using a heuristic and privacy constraint, we can create a provably private mechanism by solving the emerging optimization problem&lt;/li&gt;
+&lt;li&gt;The mechanism in this paper is relatively simple ($q$ is a discrete distribution,) but can be extended to more complex mechanisms&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
